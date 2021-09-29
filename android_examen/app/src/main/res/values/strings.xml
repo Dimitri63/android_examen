@@ -10,4 +10,5 @@
     <string name="addPlaceholderSector">Secteur</string>
     <string name="addPlaceholderBTN_Add">AJOUTER</string>
     <string name="addPlaceholderBTN_Cancel">CANCEL</string>
+    <string name="mainPlaceholderBTN_Details">VOIR</string>
 </resources>
