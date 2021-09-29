@@ -40,7 +40,6 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
 
             tvMainContactFullName = itemView.findViewById(R.id.tvMainContactFullName);
             btnMainContactDetail = itemView.findViewById(R.id.btnMainContactDetail);
-
         }
     }
 
@@ -88,6 +87,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
                 Toast.makeText(view.getContext(), "clicked on video " + contact.getId(), Toast.LENGTH_SHORT).show();
             }
         });
+
     }
 
     public interface OnItemClickListener {
