@@ -1,6 +1,8 @@
 package local.dgnex.examen;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,10 +11,12 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import local.dgnex.examen.adapter.ContactAdapter;
 import local.dgnex.examen.dao.ContactDAO;
 import local.dgnex.examen.models.Contact;
 
@@ -20,6 +24,8 @@ public class MainActivity extends AppCompatActivity {
 
     private Context context;
     private ContactDAO contactDAO;
+    private ContactAdapter contactAdapter;
+    private RecyclerView rvListContact;
 
     private TextView tvMainLabelListContact;
     private Button btnMainAddContact;
@@ -63,6 +69,15 @@ public class MainActivity extends AppCompatActivity {
            for (Contact contact : contactList) {
                System.out.println("DEBUG ----------------- " + contact);
            }
+           contactAdapter = new ContactAdapter(contactList, new ContactAdapter.OnItemClickListener() {
+               @Override
+               public void onItemClick(Contact contact) {
+                   Toast toast = Toast.makeText(context, "Details contact id= " + contact.getId(), Toast.LENGTH_SHORT);
+                   toast.show();
+               }
+           });
+            rvListContact.setAdapter(contactAdapter);
+
         }
     }
 
@@ -82,5 +97,10 @@ public class MainActivity extends AppCompatActivity {
         this.tvMainLabelListContact.setText(getString(R.string.mainLabelListContact));
 
         this.btnMainAddContact = findViewById(R.id.btnMainAddContact);
+
+        this.rvListContact = findViewById(R.id.rvListContact);
+        RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
+        this.rvListContact.setHasFixedSize(true);
+        this.rvListContact.setLayoutManager(layoutManager);
     }
 }
