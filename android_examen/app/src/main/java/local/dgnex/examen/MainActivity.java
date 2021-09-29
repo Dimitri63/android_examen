@@ -10,6 +10,8 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CompoundButton;
+import android.widget.Switch;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -22,6 +24,8 @@ import local.dgnex.examen.models.Contact;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String KEY_CONTACT = "contactId";
+
     private Context context;
     private ContactDAO contactDAO;
     private ContactAdapter contactAdapter;
@@ -29,6 +33,8 @@ public class MainActivity extends AppCompatActivity {
 
     private TextView tvMainLabelListContact;
     private Button btnMainAddContact;
+    private Switch switchFilterByFavorite;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,6 +66,7 @@ public class MainActivity extends AppCompatActivity {
                 e.printStackTrace();
             }
 
+
             return contactList;
         }
 
@@ -69,14 +76,55 @@ public class MainActivity extends AppCompatActivity {
            for (Contact contact : contactList) {
                System.out.println("DEBUG ----------------- " + contact);
            }
-           contactAdapter = new ContactAdapter(contactList, new ContactAdapter.OnItemClickListener() {
-               @Override
-               public void onItemClick(Contact contact) {
-                   Toast toast = Toast.makeText(context, "Details contact id= " + contact.getId(), Toast.LENGTH_SHORT);
-                   toast.show();
-               }
-           });
+            // Comportement par défaut, affiche tous les contacts
+            contactAdapter = new ContactAdapter(contactList, new ContactAdapter.OnItemClickListener() {
+                @Override
+                public void onItemClick(Contact contact) {
+                    Intent intent = new Intent(context, DetailActivity.class);
+                    intent.putExtra(KEY_CONTACT, contact.getId());
+                    startActivity(intent);
+                }
+            });
             rvListContact.setAdapter(contactAdapter);
+
+
+            // En fonction du switch, affiche tous les contacts ou seulement les favoris
+           switchFilterByFavorite.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+                public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+
+                    if (isChecked) {
+                        List<Contact> contactFavorites = new ArrayList<>();
+                        for (Contact contact : contactList) {
+                            if (contact.getFavorite() == 1) {
+                                contactFavorites.add(contact);
+                            }
+                        }
+                        contactAdapter = new ContactAdapter(contactFavorites, new ContactAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(Contact contact) {
+                                Intent intent = new Intent(context, DetailActivity.class);
+                                intent.putExtra(KEY_CONTACT, contact.getId());
+                                startActivity(intent);
+                            }
+                        });
+                        rvListContact.setAdapter(contactAdapter);
+                        Toast.makeText(context, "Afficher seulement les favoris", Toast.LENGTH_SHORT).show();
+                    } else {
+                        contactAdapter = new ContactAdapter(contactList, new ContactAdapter.OnItemClickListener() {
+                            @Override
+                            public void onItemClick(Contact contact) {
+                                Intent intent = new Intent(context, DetailActivity.class);
+                                intent.putExtra(KEY_CONTACT, contact.getId());
+                                startActivity(intent);
+                            }
+                        });
+                        rvListContact.setAdapter(contactAdapter);
+                        Toast.makeText(context, "Afficher tous les contacts", Toast.LENGTH_SHORT).show();
+                    }
+                }
+           });
+
+
 
         }
     }
@@ -102,5 +150,7 @@ public class MainActivity extends AppCompatActivity {
         RecyclerView.LayoutManager layoutManager = new LinearLayoutManager(context);
         this.rvListContact.setHasFixedSize(true);
         this.rvListContact.setLayoutManager(layoutManager);
+
+        this.switchFilterByFavorite = findViewById(R.id.switchFilterByFavorite);
     }
 }

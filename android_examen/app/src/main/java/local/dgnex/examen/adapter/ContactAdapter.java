@@ -85,7 +85,7 @@ public class ContactAdapter extends RecyclerView.Adapter<ContactAdapter.ContactV
             @Override
             public void onClick(View view) {
                 listener.onItemClick(contact);
-                Toast.makeText(view.getContext(), "clicked on video " + contact.getId(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(view.getContext(), "Show details id= " + contact.getId(), Toast.LENGTH_SHORT).show();
             }
         });
     }
