@@ -4,14 +4,22 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Context;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import local.dgnex.examen.dao.ContactDAO;
+import local.dgnex.examen.models.Contact;
+
 public class MainActivity extends AppCompatActivity {
 
     private Context context;
+    private ContactDAO contactDAO;
 
     private TextView tvMainLabelListContact;
     private Button btnMainAddContact;
@@ -30,11 +38,45 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+        ContactAsncTasks contactAsncTasks = new ContactAsncTasks();
+        contactAsncTasks.execute();
     }
 
+    public class ContactAsncTasks extends AsyncTask<String, String, List<Contact>> {
+        @Override
+        protected List<Contact> doInBackground(String... strings) {
+            List<Contact> contactList = new ArrayList<>();
+
+            try {
+                contactList = contactDAO.list();
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+
+            return contactList;
+        }
+
+        @Override
+        protected void onPostExecute(List<Contact> contactList) {
+
+           for (Contact contact : contactList) {
+               System.out.println("DEBUG ----------------- " + contact);
+           }
+        }
+    }
+
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+
+        ContactAsncTasks contactAsncTasks = new ContactAsncTasks();
+        contactAsncTasks.execute();
+    }
     ////////////////////////////////////////////////////////////////////////////////////////////////
     private void getElements() {
         this.context = getApplicationContext();
+        this.contactDAO = new ContactDAO(this.context);
 
         this.tvMainLabelListContact = findViewById(R.id.tvMainLabelListContact);
         this.tvMainLabelListContact.setText(getString(R.string.mainLabelListContact));
