@@ -1,0 +1,163 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DetailActivity">
+
+    <!-- FULLNAME -->
+    <TextView
+        android:id="@+id/tvDetailContactFullname"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="FullName"
+        android:gravity="center"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        android:layout_marginTop="10dp"/>
+
+    <!-- COMPANY -->
+    <TextView
+        android:id="@+id/tvDetailLabelCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detailPlaceholderCompany"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailContactFullname"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tvDetailContactCompany"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Company"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailContactFullname"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:layout_marginTop="10dp" />
+
+    <!-- ADDRESS -->
+    <TextView
+        android:id="@+id/tvDetailLabelAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detailPlaceholderAddress"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailLabelCompany"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tvDetailContactAddress"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Address"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailLabelCompany"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:layout_marginTop="10dp" />
+
+    <!-- PHONE -->
+    <TextView
+        android:id="@+id/tvDetailLabelPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detailPlaceholderPhone"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailLabelAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tvDetailContactPhone"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="phone"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailLabelAddress"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:layout_marginTop="10dp" />
+
+    <!-- EMAIL -->
+    <TextView
+        android:id="@+id/tvDetailLabelMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detailPlaceholderMail"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailLabelPhone"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tvDetailContactMail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="mail"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailLabelPhone"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:layout_marginTop="10dp" />
+
+    <!-- SECTOR -->
+    <TextView
+        android:id="@+id/tvDetailLabelSector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detailPlaceholderSector"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailLabelMail"
+        app:layout_constraintStart_toStartOf="parent"
+        android:layout_marginTop="10dp"
+        android:layout_marginStart="10dp"/>
+
+    <TextView
+        android:id="@+id/tvDetailContactSector"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="sector"
+        app:layout_constraintTop_toBottomOf="@+id/tvDetailLabelMail"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        android:layout_marginTop="10dp" />
+
+
+
+    <Button
+        android:id="@+id/btnDetailCall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detailPlaceholderBTN_Call"
+        app:layout_constraintEnd_toStartOf="@+id/btnDetailLocate"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailContactSector"
+        android:layout_marginEnd="20dp"
+        android:layout_marginTop="30dp"/>
+
+    <Button
+        android:id="@+id/btnDetailLocate"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detailPlaceholderBTN_Locate"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailContactSector"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/detailPlaceholderBTN_Message"
+        app:layout_constraintStart_toEndOf="@+id/btnDetailLocate"
+        app:layout_constraintTop_toBottomOf="@id/tvDetailContactSector"
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="30dp" />
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -22,6 +22,8 @@ import local.dgnex.examen.models.Contact;
 
 public class MainActivity extends AppCompatActivity {
 
+    public static final String KEY_CONTACT = "contactId";
+
     private Context context;
     private ContactDAO contactDAO;
     private ContactAdapter contactAdapter;
@@ -72,8 +74,9 @@ public class MainActivity extends AppCompatActivity {
            contactAdapter = new ContactAdapter(contactList, new ContactAdapter.OnItemClickListener() {
                @Override
                public void onItemClick(Contact contact) {
-                   Toast toast = Toast.makeText(context, "Details contact id= " + contact.getId(), Toast.LENGTH_SHORT);
-                   toast.show();
+                   Intent intent = new Intent(context, DetailActivity.class);
+                   intent.putExtra(KEY_CONTACT, contact.getId());
+                   startActivity(intent);
                }
            });
             rvListContact.setAdapter(contactAdapter);

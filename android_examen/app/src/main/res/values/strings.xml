@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">Examen</string>
-    <string name="mainLabelListContact">Liste des contacts</string>
+
     <string name="addPlaceholderSurname">Prénom</string>
     <string name="addPlaceholderName">Nom</string>
     <string name="addPlaceholderCompany">Société</string>
@@ -10,5 +10,16 @@
     <string name="addPlaceholderSector">Secteur</string>
     <string name="addPlaceholderBTN_Add">AJOUTER</string>
     <string name="addPlaceholderBTN_Cancel">CANCEL</string>
+
+    <string name="mainLabelListContact">Liste des contacts</string>
     <string name="mainPlaceholderBTN_Details">VOIR</string>
+
+    <string name="detailPlaceholderCompany">Société</string>
+    <string name="detailPlaceholderAddress">Adresse</string>
+    <string name="detailPlaceholderPhone">Tel</string>
+    <string name="detailPlaceholderMail">Email</string>
+    <string name="detailPlaceholderSector">Secteur</string>
+    <string name="detailPlaceholderBTN_Call">Appeler</string>
+    <string name="detailPlaceholderBTN_Locate">Localiser</string>
+    <string name="detailPlaceholderBTN_Message">SMS</string>
 </resources>
