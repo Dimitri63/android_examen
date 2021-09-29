@@ -96,12 +96,13 @@ public class DetailActivity extends AppCompatActivity {
             tvDetailContactMail.setText(contact.getMail());
             tvDetailContactSector.setText(contact.getSector());
             if (contact.getFavorite() == 0) {
-                btnDetailContactFavoriteOn.setVisibility(View.INVISIBLE);
-                btnDetailContactFavoriteOff.setVisibility(View.VISIBLE);
-            } else {
                 btnDetailContactFavoriteOn.setVisibility(View.VISIBLE);
                 btnDetailContactFavoriteOff.setVisibility(View.INVISIBLE);
+            } else {
+                btnDetailContactFavoriteOn.setVisibility(View.INVISIBLE);
+                btnDetailContactFavoriteOff.setVisibility(View.VISIBLE);
             }
+
 
             btnDetailCall.setOnClickListener(new View.OnClickListener() {
                 @Override
@@ -142,6 +143,28 @@ public class DetailActivity extends AppCompatActivity {
 
                     // Attempt to start an activity that can handle the Intent
                     startActivity(mapIntent);
+                }
+            });
+
+            btnDetailContactFavoriteOn.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    contact.setFavorite(1);
+                    contactDAO.update(contact);
+                    System.out.println("DEBUG ----------------- " + contact);
+                    finish();
+                    startActivity(getIntent());
+                }
+            });
+
+            btnDetailContactFavoriteOff.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    contact.setFavorite(0);
+                    contactDAO.update(contact);
+                    System.out.println("DEBUG ----------------- " + contact);
+                    finish();
+                    startActivity(getIntent());
                 }
             });
         }
