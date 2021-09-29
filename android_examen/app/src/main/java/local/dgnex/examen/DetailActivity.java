@@ -14,6 +14,7 @@ import android.os.AsyncTask;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -45,6 +46,9 @@ public class DetailActivity extends AppCompatActivity {
     private Button btnDetailCall;
     private Button btnDetailLocate;
     private Button btnDetailMessage;
+
+    private ImageButton btnDetailContactFavoriteOn;
+    private ImageButton btnDetailContactFavoriteOff;
 
 
     @Override
@@ -91,14 +95,21 @@ public class DetailActivity extends AppCompatActivity {
             tvDetailContactPhone.setText(contact.getPhone());
             tvDetailContactMail.setText(contact.getMail());
             tvDetailContactSector.setText(contact.getSector());
+            if (contact.getFavorite() == 0) {
+                btnDetailContactFavoriteOn.setVisibility(View.INVISIBLE);
+                btnDetailContactFavoriteOff.setVisibility(View.VISIBLE);
+            } else {
+                btnDetailContactFavoriteOn.setVisibility(View.VISIBLE);
+                btnDetailContactFavoriteOff.setVisibility(View.INVISIBLE);
+            }
 
             btnDetailCall.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Intent i = new Intent(Intent.ACTION_CALL);
-                    i.setData(Uri.parse("tel:" + contact.getPhone()));
+                    Intent intent = new Intent(Intent.ACTION_CALL);
+                    intent.setData(Uri.parse("tel:" + contact.getPhone()));
                     if (ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
-                        startActivity(i);
+                        startActivity(intent);
                     } else {
                         requestPermissions(new String[]{CALL_PHONE}, 1);
                     }
@@ -108,7 +119,29 @@ public class DetailActivity extends AppCompatActivity {
             btnDetailMessage.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    startActivity(new Intent(Intent.ACTION_VIEW, Uri.fromParts("sms", contact.getPhone(), null)));
+                    Intent intent = new Intent(Intent.ACTION_VIEW);
+                    intent.setData(Uri.parse("sms:" + contact.getPhone()));
+                    if (ContextCompat.checkSelfPermission(getApplicationContext(), CALL_PHONE) == PackageManager.PERMISSION_GRANTED) {
+                        startActivity(intent);
+                    } else {
+                        requestPermissions(new String[]{CALL_PHONE}, 1);
+                    }
+                }
+            });
+
+            btnDetailLocate.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    // Create a Uri from an intent string. Use the result to create an Intent.
+                    Uri gmmIntentUri = Uri.parse("geo:0,0?q=" + contact.getAddress());
+
+                    // Create an Intent from gmmIntentUri. Set the action to ACTION_VIEW
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    // Make the Intent explicit by setting the Google Maps package
+                    mapIntent.setPackage("com.google.android.apps.maps");
+
+                    // Attempt to start an activity that can handle the Intent
+                    startActivity(mapIntent);
                 }
             });
         }
@@ -150,6 +183,9 @@ public class DetailActivity extends AppCompatActivity {
         this.btnDetailCall = findViewById(R.id.btnDetailCall);
         this.btnDetailLocate = findViewById(R.id.btnDetailLocate);
         this.btnDetailMessage = findViewById(R.id.btnDetailMessage);
+
+        this.btnDetailContactFavoriteOn = findViewById(R.id.btnDetailContactFavoriteOn);
+        this.btnDetailContactFavoriteOff = findViewById(R.id.btnDetailContactFavoriteOff);
 
     }
 }
