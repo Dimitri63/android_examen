@@ -14,10 +14,12 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import java.util.ArrayList;
 import java.util.List;
 
+import local.dgnex.examen.dao.ContactDAO;
 import local.dgnex.examen.models.Contact;
 
 public class AddActivity extends AppCompatActivity {
@@ -40,6 +42,7 @@ public class AddActivity extends AppCompatActivity {
     private Button btnAddContactCancel;
 
     private Context context;
+    private ContactDAO contactDAO;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -192,6 +195,16 @@ public class AddActivity extends AppCompatActivity {
                 contact.setFavorite(0);
                 contact.setSector(spAddContactSector.getSelectedItem().toString());
                 System.out.println("DEBUG ----------------- " + contact);
+                if (contact.getName() != null && contact.getSurname() != null && contact.getCompany() != null && contact.getAddress() != null && contact.getPhone() != null && contact.getMail() != null) {
+                    Contact newContact = contactDAO.add(contact);
+                    Toast toast = Toast.makeText(context, "Video ajouté ", Toast.LENGTH_SHORT);
+                    toast.show();
+                    finish();
+                } else {
+                    Toast toast = Toast.makeText(context, "Il manque des informations ", Toast.LENGTH_SHORT);
+                    toast.show();
+
+                }
             }
         });
 
@@ -210,6 +223,7 @@ public class AddActivity extends AppCompatActivity {
     ////////////////////////////////////////////////////////////////////////////////////////////////
     private void getElements() {
         this.context = getApplicationContext();
+        this.contactDAO = new ContactDAO(this.context);
 
         this.tvAddContactLabelSurname = findViewById(R.id.tvAddContactLabelSurname);
         this.tvAddContactLabelSurname.setText(getString(R.string.addPlaceholderName));

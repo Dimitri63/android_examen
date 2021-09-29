@@ -1,6 +1,7 @@
 package local.dgnex.examen.models;
 
 public class Contact {
+    private Long id;
     private String name;
     private String surname;
     private String company;
@@ -11,6 +12,14 @@ public class Contact {
     private Integer favorite;
 
     public Contact() {
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getName() {
@@ -80,7 +89,8 @@ public class Contact {
     @Override
     public String toString() {
         return "Contact{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", surname='" + surname + '\'' +
                 ", company='" + company + '\'' +
                 ", address='" + address + '\'' +
