@@ -1,3 +1,13 @@
 <resources>
     <string name="app_name">Examen</string>
+    <string name="mainLabelListContact">Liste des contacts</string>
+    <string name="addPlaceholderSurname">Prénom</string>
+    <string name="addPlaceholderName">Nom</string>
+    <string name="addPlaceholderCompany">Société</string>
+    <string name="addPlaceholderAddress">Adresse</string>
+    <string name="addPlaceholderPhone">Téléphone</string>
+    <string name="addPlaceholderMail">Email</string>
+    <string name="addPlaceholderSector">Secteur</string>
+    <string name="addPlaceholderBTN_Add">AJOUTER</string>
+    <string name="addPlaceholderBTN_Cancel">CANCEL</string>
 </resources>
